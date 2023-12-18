@@ -98,12 +98,15 @@ const lightbox = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
 });
 
-lightbox.on('shown.simplelightbox', function () {
-  const modal = document.querySelector('.sl-wrapper');
-  modal.style.backgroundColor = 'rgba(46, 47, 66, 0.80)';
-});
+function setColor(selector, color) {
+  const elements = document.querySelectorAll(selector);
+  elements.forEach(element => {
+    element.style.color = color;
+  });
+}
 
-lightbox.on('closed.simplelightbox', function () {
-  const modal = document.querySelector('.sl-wrapper');
-  modal.style.backgroundColor = '';
+lightbox.on('shown.simplelightbox', function () {
+  document.querySelector('.sl-wrapper').style.backgroundColor =
+    'rgba(46, 47, 66, 0.80)';
+  setColor('.sl-wrapper .sl-close, .sl-counter, .sl-navigation button', '#fff');
 });
