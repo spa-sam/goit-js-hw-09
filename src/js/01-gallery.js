@@ -93,9 +93,22 @@ const createGalleryItem = ({ preview, original, description }) => {
  // додаємо розмітку всієї галереї в контейнер
  galleryContainer.innerHTML = galleryMarkup;
 
+ 
 const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionPosition: 'bottom',
   captionDelay: 250,
+  
+  
 });
 
+lightbox.on('shown.simplelightbox', function () {
+  const modal = document.querySelector('.sl-wrapper');
+  modal.style.backgroundColor = 'rgba(46, 47, 66, 0.80)';
+
+});
+
+lightbox.on('closed.simplelightbox', function () {
+  const modal = document.querySelector('.sl-wrapper');
+  modal.style.backgroundColor = '';
+});
