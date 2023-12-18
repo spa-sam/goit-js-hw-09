@@ -1,4 +1,4 @@
-
+'use strict';
 const images = [
   {
     preview:
@@ -69,11 +69,11 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 // знаходимо контейнер галереї
-const galleryContainer = document.querySelector('.gallery'); 
+const galleryContainer = document.querySelector('.gallery');
 
 // створюємо розмітку елемента галереї
 const createGalleryItem = ({ preview, original, description }) => {
-    return `
+  return `
         <li class="gallery-item">
             <a class="gallery-link" href="${original}">
                 <img
@@ -86,26 +86,21 @@ const createGalleryItem = ({ preview, original, description }) => {
     `;
 };
 
+// створюємо розмітку всієї галереї
+const galleryMarkup = images.map(createGalleryItem).join('');
 
- // створюємо розмітку всієї галереї
- const galleryMarkup = images.map(createGalleryItem).join('');
+// додаємо розмітку всієї галереї в контейнер
+galleryContainer.innerHTML = galleryMarkup;
 
- // додаємо розмітку всієї галереї в контейнер
- galleryContainer.innerHTML = galleryMarkup;
-
- 
 const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionPosition: 'bottom',
   captionDelay: 250,
-  
-  
 });
 
 lightbox.on('shown.simplelightbox', function () {
   const modal = document.querySelector('.sl-wrapper');
   modal.style.backgroundColor = 'rgba(46, 47, 66, 0.80)';
-
 });
 
 lightbox.on('closed.simplelightbox', function () {
